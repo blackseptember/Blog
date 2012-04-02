@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	var v = false;
+	var $f, $m;
 
 	/* If button Go Vegetarian has been pressed, removes from the menu
 	 * all entries which are not vegetarian.
@@ -7,7 +8,7 @@ $(document).ready(function() {
 	$("button#vegOn").click(function() {
 		if (v == false) {
 			//Removes the fish and store it in a var so it can be accessed later
-			$f = $(".fish").parent().parent().remove();
+			$f = $(".fish").parent().parent().detach();
 
 			//Replace hamburger with portobello
 			$(".hamburger").replaceWith("<li class='portobello'><em>Portobello Mushroom</em></li>");
@@ -41,6 +42,7 @@ $(document).ready(function() {
 				$(this).after($m[i]);
 			});
 
+			//In the beginning there was no Tofu class, so it needs to be removed.
 			$(".tofu").remove();
 			v = false;
 		}

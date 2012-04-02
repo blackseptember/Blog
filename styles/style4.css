@@ -29,7 +29,7 @@
 }
 
 .bottom {
-    clear:both;
+    clear: both;
     padding: 2%;
     width: 96%;
     height: 60px;
@@ -51,6 +51,13 @@
     padding-bottom: 15px;
 }
 
+
+.menu_list li {
+    display: inline;
+    list-style-type: none;
+    padding-left: 15px;
+}
+
 .leaf {
-	list-style-image:url("D:/jQuery/images/leaf.png");
+	list-style-image:url("../images/leaf.png");
 }
