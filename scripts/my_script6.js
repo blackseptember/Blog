@@ -87,22 +87,27 @@ var hand = {
 			}
 			$("#hdrTotal").html("Total: " + this.current_total );
 			
-			if(this.current_total > 21){
+			//Checks if the sum of current cards is greater than 21
+			if (this.current_total > 21) {
 				$("#btnStick").trigger("click");
 				$("#imgResult").attr('src','images/x2.png');
 				$("#hdrResult").html("BUST!")
 							   .attr('class', 'lose');
-			}else if(this.current_total == 21){
+			//Checks if it's equal to 21
+			} else if (this.current_total == 21) {
 				$("#btnStick").trigger("click");
 				$("#imgResult").attr('src','images/check.png');
 				$("#hdrResult").html("BlackJack!")
 							   .attr('class', 'win');
-			}else if(this.current_total <= 21 && this.cards.length == 5){
+			//Checks if it's less or equal to 21 and if 5 card have been passed
+			} else if (this.current_total <= 21 && this.cards.length == 5) {
 				$("#btnStick").trigger("click");
 				$("#imgResult").attr('src','images/check.png');
 				$("#hdrResult").html("BlackJack - 5 card trick!")
 							   .attr('class', 'win');
-			}else{ }
+			} else { 
+				//If none of the above then keep playing
+			}
 		}
 	};
 
@@ -130,13 +135,47 @@ var hand = {
 						  		.fadeOut('slow')
 						  		.fadeIn('slow');
 			}
+		//Keep looping until gets a good card
 		} while (!good_card);
+
 		good_card = false;
+
+		//Get the total
 		hand.sumCardTotal();
 	}
 
 	$("#btnDeal").click(function() {
+		//Deal the two cards
 		deal();
+
+		//Hide the deal button but show the hit or stick button
 		$(this).toggle();
+		$("#btnHit").toggle();
+		$("#btnStick").toggle();
+	});
+
+	$("#btnHit").click(function() {
+		//Display a card
+		hit();
+	});
+
+	$("#btnStick").click(function() {
+		$("#hdrResult").html('Stick!');
+		$("#result").toggle();
+	});
+
+	//Restart the game
+	$("#btnRestart").click(function() {
+		//Reset all the elements back to the way they were
+		$("#result").toggle();
+		$(this).toggle();
+		$("#my_hand").empty();
+		$("#hdrResult").html('');
+		used_cards.length = 0;
+		hand.cards.length = 0;
+		hand.current_total = 0;
+
+		//Simulate a click of the Deal button
+		$("#btnDeal").toggle().trigger('click');
 	});
 });
